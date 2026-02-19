@@ -1,0 +1,225 @@
+import Image from "next/image";
+const policySections = [
+  {
+    items: [
+      {
+        type: "header",
+        title: "1. Information We Collect",
+        description: "We may collect the following types of information:",
+      },
+      {
+        type: "list",
+        title: "Personal Information",
+        description:
+          ": This includes your name, email address, phone number, delivery address, and payment details when you place an order or contact us.",
+      },
+      {
+        type: "list",
+        title: "Non-Personal Information",
+        description:
+          ": This includes browser type, device information, IP address, pages visited, and browsing behavior on our website.",
+      },
+      {
+        type: "list",
+        title: "Cookies and Tracking",
+        description:
+          ": We use cookies and similar technologies to enhance your browsing experience, remember your preferences, and improve our services.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "2. How We Use Your Information",
+        description: "The information we collect is used to:",
+      },
+      { type: "list", description: "Process and fulfill orders." },
+      {
+        type: "list",
+        description: "Respond to inquiries and provide customer support.",
+      },
+      {
+        type: "list",
+        description: "Improve our website, products, and services.",
+      },
+      {
+        type: "list",
+        description:
+          "Send promotional emails and updates (only if you have opted in).",
+      },
+      {
+        type: "list",
+        description:
+          "Monitor and analyze website usage to enhance user experience.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "3. Sharing Your Information",
+        description:
+          "We respect your privacy and do not sell or rent your personal information. We may share information only in the following circumstances:",
+      },
+      {
+        type: "list",
+
+        description:
+          "With trusted third-party service providers who help us operate our business, such as payment processors or delivery services.",
+      },
+      {
+        type: "list",
+
+        description: "When required by law or to protect our legal rights.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "4. Data Security",
+        description:
+          "We implement appropriate technical and organizational measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the Internet or storage is 100% secure.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "5. Your Rights",
+        description: "You have the right to:",
+      },
+
+      {
+        type: "list",
+        description: "Opt-out of marketing communications at any time.",
+      },
+      {
+        type: "list",
+        description:
+          "Request the deletion of your personal data, subject to legal or contractual obligations.",
+      },
+      {
+        type: "list",
+        description:
+          "To exercise your rights, please contact us at the information below.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "6. Third-Party Links",
+        description:
+          "Our website may contain links to third-party websites. We are not responsible for the privacy practices or content of these external websites. We encourage you to read their privacy policies before providing any personal information.",
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "7. Changes to This Policy",
+        description:
+          'We may update this Privacy Policy from time to time. Any changes will be posted on this page with the updated "Effective Date." Your continued use of our website indicates your acceptance of the updated policy.',
+      },
+    ],
+  },
+  {
+    items: [
+      {
+        type: "header",
+        title: "8. Contact Us",
+        description:
+          "If you have any questions about this Privacy Policy or how your information is handled, you can reach us at:",
+      },
+      { type: "list", title: "Email", description: ": info@petals.com" },
+      { type: "list", title: "Phone", description: ": +94 77 123 4567" },
+      {
+        type: "list",
+        title: "Address",
+        description: ": 123 Flower Street, Colombo, Sri Lanka",
+      },
+    ],
+  },
+];
+
+const PrivacyPolicy = () => {
+  return (
+    <>
+      <section>
+        <div className="relative w-full h-124.5 overflow-hidden">
+          <Image
+            src="/privacy-policy/privacypolicy.avif"
+            alt="Privacy Policy Background"
+            fill
+            className="object-cover object-center"
+            priority
+          />
+
+          <div className="absolute inset-0 bg-black/40"></div>
+
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+            <h1 className="font-laluxes text-2xl font-normal md:text-[32px] stroke-medium">
+              privacy policy
+            </h1>
+            <p className="text-[16px] md:text-[20px] font-light text-light-gray/90 font-poppins mt-3 max-w-2xl">
+              Effective Date: January 28, 2026
+            </p>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div className="container mx-auto lg:px-5 px-4 sm:pt-24 pt-19  sm:pb-24 pb-19">
+          <h1 className="font-laluxes text-2xl font-normal text-secondary-black stroke-medium">
+            privacy policy
+          </h1>
+          <p className="text-[16px] md:text-[16px] font-light text-[#00000080] font-poppins mt-3 max-w-5xl">
+            Your privacy is important to us. This Privacy Policy explains how we
+            collect, use, and protect your information when you visit our
+            website, purchase products, or interact with our services.
+          </p>
+
+          <div>
+            {policySections.map((section, sectionIndex) => (
+              <div key={sectionIndex}>
+                {section.items.map((item, index) => {
+                  if (item.type === "header") {
+                    return (
+                      <div key={index}>
+                        <h1 className="font-laluxes text-2xl font-normal text-secondary-black mt-10 stroke-medium">
+                          {item.title}
+                        </h1>
+                        <p className="text-[16px] font-light text-[#00000080] font-poppins mt-3 max-w-2xl">
+                          {item.description}
+                        </p>
+                      </div>
+                    );
+                  }
+
+                  return (
+                    <ul key={index} className="list-disc pl-6 mt-4 max-w-2xl">
+                      <li className="text-[16px] font-light text-[#00000080] font-poppins">
+                        <span className="font-medium text-secondary-black ">
+                          {item.title}
+                        </span>{" "}
+                        {item.description}
+                      </li>
+                    </ul>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+};
+
+export default PrivacyPolicy;

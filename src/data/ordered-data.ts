@@ -1,0 +1,85 @@
+import { ca } from "zod/v4/locales";
+
+export const orderedData = [
+  {
+    tab: "In Progress",
+    image1: "/home/flower1.avif",
+    orderNum: "#153289476",
+    date: "25 Jan 2026",
+    status: "Out For Delivery",
+    name: "John Doe",
+    address: "123, Main Street, City, Country",
+    shippingMethod: "Delivery",
+    paymentMethod: "Card Payment",
+    product: [
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+    ],
+  },
+  {
+    tab: "Delivered",
+    image1: "/home/flower1.avif",
+    orderNum: "#1532894",
+    date: "20 Jan 2026",
+    status: "Delivered",
+    name: "John Doe",
+    address: "123, Main Street, City, Country",
+    shippingMethod: "Delivery",
+    paymentMethod: "Card Payment",
+    product: [
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+    ],
+  },
+  {
+    tab: "Cancelled",
+    image1: "/home/flower1.avif",
+    orderNum: "#15328947",
+    date: "25 Jan 2026",
+    status: "Cancelled",
+    name: "John Doe",
+    address: "123, Main Street, City, Country",
+    shippingMethod: "Delivery",
+    paymentMethod: "Card Payment",
+    product: [
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+      {
+        src: "/home/flower1.avif",
+        title: "Red Rose Bouquet",
+        category: "Flower Bouquet",
+        quantity: 2,
+        price: "5,000.00",
+      },
+    ],
+  },
+];

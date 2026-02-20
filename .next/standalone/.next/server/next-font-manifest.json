@@ -1,0 +1,249 @@
+{
+  "app": {
+    "[project]/src/app/_not-found/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/about/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/billing-details/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/cart/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/contact-us/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/event/[slug]/[featureSlug]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/event/[slug]/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/event/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/faq/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/forgot-password/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/order-placed-succesfully/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/privacy-policy/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/products/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/products/single-product/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/profile/address/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/profile/order-history/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/profile/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/profile/payment/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/shipping-details/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/terms-of-use/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ],
+    "[project]/src/app/wishlist/page": [
+      "static/media/caa3a2e1cccd8315-s.p.853070df.woff2",
+      "static/media/797e433ab948586e-s.p.dbea232f.woff2",
+      "static/media/LaLuxes-s.p.4a8d8be9.woff",
+      "static/media/043b82ab31bba5a4-s.p.b67c2e04.woff2",
+      "static/media/c7d9ca68f9942779-s.p.5f8f1848.woff2",
+      "static/media/c875c6f5d3e977ac-s.p.80fc2c9e.woff2",
+      "static/media/a218039a3287bcfd-s.p.4a23d71b.woff2",
+      "static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2",
+      "static/media/e2334d715941921e-s.p.d82a9aff.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pages": {},
+  "pagesUsingSizeAdjust": false
+}

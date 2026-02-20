@@ -21,6 +21,7 @@ import Link from "next/link";
 
 type Styleprops = {
     iconStyle?: string;
+    onLoginSuccess?: () => void;
 }
 
 const formSchema = z.object({
@@ -41,10 +42,12 @@ const formSchema = z.object({
 
 type ContactFormValues = z.infer<typeof formSchema>;
 
-export function LoginPopup({ iconStyle }: Styleprops) {
+export function LoginPopup({ iconStyle, onLoginSuccess }: Styleprops) {
 
     const [showPassword, setShowPassword] = useState(false);
     const [open, setOpen] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+    const [apiError, setApiError] = useState<string | null>(null);
 
     useEffect(() => {
         const handler = () => setOpen(true)
@@ -62,8 +65,33 @@ export function LoginPopup({ iconStyle }: Styleprops) {
         },
     });
 
-    function onSubmit(data: ContactFormValues) {
-        console.log(data);
+    async function onSubmit(data: ContactFormValues) {
+        setIsLoading(true);
+        setApiError(null);
+        try {
+            const res = await fetch("/api/auth/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    email: data.emailAddress,
+                    password: data.password,
+                }),
+            });
+            const result = await res.json() as { error?: string };
+            if (!res.ok) {
+                setApiError(result.error || "Login failed");
+                return;
+            }
+            // Success — close popup, notify header to refresh session
+            setOpen(false);
+            form.reset();
+            window.dispatchEvent(new CustomEvent("auth-change"));
+            if (onLoginSuccess) onLoginSuccess();
+        } catch {
+            setApiError("Network error. Please try again.");
+        } finally {
+            setIsLoading(false);
+        }
     }
     const openSignup = () => {
         // close login and notify signup popup to open
@@ -86,6 +114,11 @@ export function LoginPopup({ iconStyle }: Styleprops) {
                         Don’t have an account? <button type="button" onClick={openSignup} className="font-bold text-primary cursor-pointer">Signup</button>
                         <div className="w-full mt-9">
                             <form className="space-y-3.5 w-full" onSubmit={form.handleSubmit(onSubmit)}>
+                                {apiError && (
+                                    <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 text-sm font-poppins rounded">
+                                        {apiError}
+                                    </div>
+                                )}
 
 
                                 <Controller
@@ -151,8 +184,8 @@ export function LoginPopup({ iconStyle }: Styleprops) {
                                 <Link href="/forgot-password" onClick={() => setOpen(false)} className="flex justify-end font-poppins font-medium text-[#838383] -mt-2 cursor-pointer">Forget password?</Link>
 
                                 <div className="flex justify-end mt-6">
-                                    <Button type="submit" className="px-16  w-full">
-                                        Sign In
+                                    <Button type="submit" className="px-16  w-full" disabled={isLoading}>
+                                        {isLoading ? "Signing in..." : "Sign In"}
                                     </Button>
                                 </div>
                             </form>

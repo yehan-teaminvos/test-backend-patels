@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
@@ -15,72 +15,123 @@ import { Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { OrderSummary } from "@/components/order-summary";
 
-export default function Cart() {
-  const cartList = [
-    {
-      id: "1",
-      name: "Blush Harmony",
-      subtitle: "Flower Bouquet",
-      price: 5750,
-      quantity: 2,
-      image: "/home/flower1.avif",
-    },
-    {
-      id: "2",
-      name: "Morning Bliss",
-      subtitle: "Mixed Flowers",
-      price: 4200,
-      quantity: 1,
-      image: "/home/flower2.avif",
-    },
-    {
-      id: "3",
-      name: "Evening Charm",
-      subtitle: "Rose Bouquet",
-      price: 3300,
-      quantity: 2,
-      image: "/home/flower3.avif",
-    },
-  ];
+type CartItem = {
+  id: number;
+  name: string;
+  subtitle: string;
+  price: number;
+  quantity: number;
+  image: string;
+  productId: string;
+};
 
-  const [items, setItems] = useState(cartList);
+export default function Cart() {
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
+
+  // ← Load cart from API on mount
+  useEffect(() => {
+    async function loadCart() {
+      try {
+        const res = await fetch("/api/cart");
+        if (!res.ok) {
+          setItems([]);
+          return;
+        }
+        const data = await res.json() as {
+          items: {
+            id: number;
+            quantity: number;
+            productId: string;
+            price: number;
+            productName: string;
+            productImage: string;
+            productSlug: string;
+            inStock: boolean;
+          }[];
+          subtotal: number;
+        };
+        setItems(
+          data.items.map((item) => ({
+            id: item.id,
+            name: item.productName || "Product",
+            subtitle: "Flower",
+            price: item.price,
+            quantity: item.quantity,
+            image: item.productImage || "",
+            productId: item.productId,
+          }))
+        );
+      } catch {
+        setItems([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadCart();
+  }, []);
 
   const subtotal = items.reduce(
     (sum, item) => sum + item.price * item.quantity,
     0,
   );
   const discount = 0;
-  const deliveryFee = 750;
+  const deliveryFee = items.length > 0 ? 750 : 0;
   const total = subtotal - discount + deliveryFee;
 
   const handleCheckout = () => {
     router.push("/billing-details");
   };
 
-  const increment = (id: string) => {
+  const increment = async (id: number) => {
+    const item = items.find((it) => it.id === id);
+    if (!item) return;
+    const newQty = item.quantity + 1;
     setItems((prev) =>
-      prev.map((it) =>
-        it.id === id ? { ...it, quantity: it.quantity + 1 } : it,
-      ),
+      prev.map((it) => (it.id === id ? { ...it, quantity: newQty } : it)),
     );
+    await fetch("/api/cart", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItemId: id, quantity: newQty }),
+    });
   };
 
-  const decrement = (id: string) => {
+  const decrement = async (id: number) => {
+    const item = items.find((it) => it.id === id);
+    if (!item) return;
+    const newQty = Math.max(1, item.quantity - 1);
     setItems((prev) =>
-      prev.map((it) =>
-        it.id === id ? { ...it, quantity: Math.max(1, it.quantity - 1) } : it,
-      ),
+      prev.map((it) => (it.id === id ? { ...it, quantity: newQty } : it)),
     );
+    await fetch("/api/cart", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItemId: id, quantity: newQty }),
+    });
   };
 
-  const removeItem = (id: string) => {
+  const removeItem = async (id: number) => {
     setItems((prev) => prev.filter((it) => it.id !== id));
+    await fetch("/api/cart", {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ cartItemId: id }),
+    });
   };
 
   const formatPrice = (n: number) => {
     return `Rs. ${n.toLocaleString()}.00`;
   };
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="font-poppins text-secondary-black/50">Loading cart...</p>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -113,12 +164,12 @@ export default function Cart() {
                   </p>
                 </div>
 
-                {items.map((item) => (
+                {items.map((item, index) => (
                   <div key={item.id}>
                     <div
                       className={cn(
                         "hidden md:flex border w-full p-5 items-center",
-                        item.id === `1` ? "mt-5" : "mt-3",
+                        index === 0 ? "mt-5" : "mt-3",
                       )}
                     >
                       <div className="flex w-3/6">
@@ -179,7 +230,7 @@ export default function Cart() {
                     <div
                       className={cn(
                         "md:hidden border rounded-lg p-4 space-y-4",
-                        item.id === `1` ? "mt-0" : "mt-4",
+                        index === 0 ? "mt-0" : "mt-4",
                       )}
                     >
                       {/* Product Info with Image */}

@@ -1,35 +1,53 @@
+"use client";
+
 import { RecipientForm } from "@/components/recipient-form";
 import { SenderForm } from "@/components/sender-form";
 import { SavedAddresses } from "@/components/saved-addresses";
 import { OrderSummary } from "@/components/order-summary";
+import { useEffect, useState } from "react";
+
+type CartItem = {
+  id: string;
+  name: string;
+  subtitle: string;
+  price: number;
+  quantity: number;
+  image: string;
+};
 
 const BillingDetails = () => {
-  const cartItems = [
-    {
-      id: "1",
-      name: "Blush Harmony",
-      subtitle: "Flower Bouquet",
-      price: 5750,
-      quantity: 2,
-      image: "/home/flower1.avif",
-    },
-    {
-      id: "2",
-      name: "Morning Bliss",
-      subtitle: "Mixed Flowers",
-      price: 4200,
-      quantity: 1,
-      image: "/home/flower2.avif",
-    },
-    {
-      id: "3",
-      name: "Evening Charm",
-      subtitle: "Rose Bouquet",
-      price: 3300,
-      quantity: 2,
-      image: "/home/flower3.avif",
-    },
-  ];
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [subtotal, setSubtotal] = useState(0);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchCart() {
+      try {
+        const res = await fetch("/api/cart");
+        if (res.ok) {
+          const data = (await res.json()) as { items: any[]; subtotal: number };
+          // Map API data to component structure
+          const items = data.items.map((item: any) => ({
+            id: item.id.toString(),
+            name: item.productName,
+            subtitle: "Flower Bouquet", // generic subtitle
+            price: item.price,
+            quantity: item.quantity,
+            image: item.productImage,
+          }));
+          setCartItems(items);
+          setSubtotal(data.subtotal);
+        }
+      } catch (e) {
+        console.error("Failed to fetch cart", e);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchCart();
+  }, []);
+
+  if (loading) return <div className="h-screen flex justify-center items-center">Loading...</div>;
 
   return (
     <>
@@ -56,9 +74,9 @@ const BillingDetails = () => {
               <div className="lg:sticky lg:top-8">
                 <OrderSummary
                   route="/shipping-details"
-                  subtotal={5750.0}
+                  subtotal={subtotal}
                   discount={0.0}
-                  total={6500.0}
+                  total={subtotal} // + shipping? handled in next step maybe
                   showCartItems={true}
                   cartItems={cartItems}
                   buttonText="Continue To Shipping"

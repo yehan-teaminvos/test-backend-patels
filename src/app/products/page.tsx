@@ -1,10 +1,32 @@
+// ═══════════════════════════════════════════════════════════
+// PRODUCTS PAGE — Now reads from DATABASE instead of static file!
+// ═══════════════════════════════════════════════════════════
+//
+// BEFORE:
+//   import { products } from "@/data/products";    ← static file
+//   const filtered = products.filter(...)           ← filter in JS
+//
+// AFTER:
+//   import { getDb } from "@/lib/get-db";           ← database
+//   import { getProducts } from "@/db/product-queries";
+//   const { products } = await getProducts(db, filters);  ← filter in DB!
+//
+// WHY IS THIS BETTER?
+//   1. Data lives in the database — you can add/edit/remove products
+//      without touching code
+//   2. Filtering/sorting/pagination happens in SQL (much faster)
+//   3. The database is the single source of truth
+
 import ActiveFilter from "@/components/products/active-filter";
 import ProductCard from "@/components/product-card";
 import ProductListSort from "../../components/products/product-list-sort";
 import ProductPagination from "@/components/products/product-pagination";
-import { products } from "@/data/products";
 import { formatLKR } from "@/lib/priceFromatLKR";
 import { SearchX } from "lucide-react";
+
+// ─── NEW: Import database helpers instead of static data ───
+import { getDb } from "@/lib/get-db";
+import { getProducts } from "@/db/product-queries";
 
 type SearchParams = Promise<Record<string, string | string[] | undefined>>;
 
@@ -14,69 +36,48 @@ interface ProductsPageProps {
 
 const ITEMS_PER_PAGE = 10;
 
-const normalize = (text: string) =>
-  text.toLowerCase().trim().replace(/\s+/g, "-");
-
-const SORT_STRATEGIES: Record<string, (a: any, b: any) => number> = {
-  lth: (a, b) => a.price - b.price,
-  htl: (a, b) => b.price - a.price,
-  new: (a, b) => b.productId.localeCompare(a.productId),
-  default: () => 0,
-};
-
 export default async function ProductsPage({
   searchParams,
 }: ProductsPageProps) {
   const params = await searchParams;
 
-  // Data processing logic
+  // Read filters from URL (same as before)
   const currentPage = Math.max(1, Number(params.page) || 1);
-  const sortKey = (
-    typeof params.sort === "string" ? params.sort : "default"
-  ) as keyof typeof SORT_STRATEGIES;
-  const minPrice = Number(params.min) || 0;
-  const maxPrice = Number(params.max) || Infinity;
-  const minRating = Number(params.rating) || 0;
+  const sortKey = typeof params.sort === "string" ? params.sort : "default";
+
+  // Map the frontend sort keys to the backend sort keys
+  const sortMap: Record<string, "price-asc" | "price-desc" | "newest" | "rating"> = {
+    lth: "price-asc",
+    htl: "price-desc",
+    new: "newest",
+    default: "newest",
+  };
 
   const selectedFlowers =
     typeof params.flower === "string" ? params.flower.split(",") : [];
-  const selectedColors =
-    typeof params.color === "string" ? params.color.split(",") : [];
   const selectedOccasions =
     typeof params.occasion === "string" ? params.occasion.split(",") : [];
+  const selectedColors =
+    typeof params.color === "string" ? params.color.split(",") : [];
 
-  const filtered = products.filter((p) => {
-    if (p.price < minPrice || p.price > maxPrice) return false;
-    if ((p.rating ?? 0) < minRating) return false;
-    if (
-      selectedFlowers.length &&
-      !selectedFlowers.includes(normalize(p.flowerType))
-    )
-      return false;
-    if (
-      selectedColors.length &&
-      !selectedColors.includes(p.color.toLowerCase())
-    )
-      return false;
-    if (
-      selectedOccasions.length &&
-      !p.occasion.some((o) => selectedOccasions.includes(o))
-    )
-      return false;
-
-    if (params.availability && p.availability !== params.availability)
-      return false;
-
-    return true;
+  // ─── NEW: Fetch from database! ───
+  // Instead of: const filtered = products.filter(...)
+  // We now let the database do the filtering!
+  const db = await getDb();
+  const result = await getProducts(db, {
+    flower: selectedFlowers[0] || undefined,      // filter by flower type
+    occasion: selectedOccasions[0] || undefined,   // filter by occasion
+    color: selectedColors[0] || undefined,         // filter by color
+    inStock: params.availability === "in-stock" ? true : undefined,
+    sort: sortMap[sortKey] || "newest",
+    page: currentPage,
+    limit: ITEMS_PER_PAGE,
   });
 
-  const sorted = [...filtered].sort(
-    SORT_STRATEGIES[sortKey] || SORT_STRATEGIES.default,
-  );
-
-  const totalResults = sorted.length;
+  // result = { products: [...], total: 17, page: 1, totalPages: 2 }
+  const totalResults = result.total;
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-  const paginated = sorted.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  const paginated = result.products;
 
   return (
     <main>
@@ -112,7 +113,7 @@ export default async function ProductsPage({
                 No Blooms Found
               </h2>
               <p className="text-gray-500 max-w-sm font-poppins leading-relaxed">
-                We couldn’t find any matches for your current filters. Try
+                We couldn't find any matches for your current filters. Try
                 broadening your search or resetting the price range.
               </p>
             </div>
@@ -120,9 +121,9 @@ export default async function ProductsPage({
             <div className="grid grid-cols-2 xl:grid-cols-3 gap-x-3.5 xl:gap-x-6 gap-y-10">
               {paginated.map((product) => (
                 <ProductCard
-                  key={product.productId}
+                  key={product.id}
                   isHaveFavIcon={false}
-                  src={product.productImage}
+                  src={product.productImage || "/home/flower1.avif"}
                   name={product.name}
                   price={formatLKR(product.price)}
                   currency="Rs."
@@ -146,4 +147,3 @@ export default async function ProductsPage({
     </main>
   );
 }
-

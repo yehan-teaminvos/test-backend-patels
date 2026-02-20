@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/app/laluxesfont_f0897c27.module.css"],"sourcesContent":["@font-face {\n    \nfont-family: 'laluxesFont';\n    src: url('@vercel/turbopack-next/internal/font/local/font?{%22path%22:%22../assets/fonts/LaLuxes.woff%22,%22preload%22:true,%22has_size_adjust%22:true}') format('woff');\n    font-display: swap;\n    \n}\n\n@font-face {\n    font-family: 'laluxesFont Fallback';\n    src: local(\"Arial\");\n    ascent-override: 67.93%;\ndescent-override: 19.78%;\nline-gap-override: 0.00%;\nsize-adjust: 156.19%;\n\n}\n\n.className {\n    font-family: 'laluxesFont', 'laluxesFont Fallback';\n    \n}\n.variable {\n    --font-laluxes: 'laluxesFont', 'laluxesFont Fallback';\n}\n\n"],"names":[],"mappings":"AAAA;;;;;;AAQA;;;;;;;;;AAUA;;;;AAIA"}}]
+}

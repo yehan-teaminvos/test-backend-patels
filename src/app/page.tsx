@@ -4,67 +4,32 @@ import { Button } from "@/components/ui/button";
 import { MoveUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+// ← NEW: fetch products from the database
+import { getDb } from "@/lib/get-db";
+import { getProducts } from "@/db/product-queries";
 
-export const justBloomed = [
-  {
-    name: "Blush Harmony",
-    price: "Rs. 5,750.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower1.avif",
-    link: "/",
-  },
-  {
-    name: "Petal Whisper",
-    price: "Rs. 4,500.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower2.avif",
-    link: "/",
-  },
-  {
-    name: "Golden Dawn Bouquet",
-    price: "Rs. 6,200.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower3.avif",
-    link: "/",
-  },
-  {
-    name: "Velvet Bloom",
-    price: "Rs. 5,800.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower4.avif",
-    link: "/",
-  },
-  {
-    name: "Golden Dawn Bouquet",
-    price: "Rs. 6,200.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower3.avif",
-    link: "/",
-  },
-  {
-    name: "Petal Whisper",
-    price: "Rs. 4,500.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower2.avif",
-    link: "/",
-  },
-  {
-    name: "Velvet Bloom",
-    price: "Rs. 5,800.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower4.avif",
-    link: "/",
-  },
-  {
-    name: "Blush Harmony",
-    price: "Rs. 5,750.00",
-    installment: "Rs 1,316.66",
-    src: "/home/flower1.avif",
-    link: "/",
-  },
-];
+// Helper to format price for display
+function formatPrice(price: number) {
+  return `Rs. ${price.toLocaleString()}.00`;
+}
+function formatInstallment(price: number) {
+  return `Rs ${(price / 3).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
 
-export default function Home() {
+export default async function Home() {
+  // ← OLD: const justBloomed = [...8 hardcoded products...]
+  // ← NEW: fetch latest products from the DB
+  const db = await getDb();
+  const { products } = await getProducts(db, { limit: 8, sort: "newest" });
+
+  const justBloomed = products.map((p) => ({
+    id: p.id,
+    name: p.name,
+    price: formatPrice(p.price),
+    installment: formatInstallment(p.price),
+    src: p.productImage,
+    link: `/products/single-product?id=${p.id}`,
+  }));
   const social = [
     {
       name: "Facebook",
@@ -242,9 +207,10 @@ export default function Home() {
             every moment.
           </p>
           <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 mt-13">
-            {justBloomed.slice(0, 84).map((item, id) => (
+            {justBloomed.slice(0, 84).map((item) => (
               <ProductCard
-                key={id}
+                key={item.id}
+                id={item.id}
                 imageStyle="lg:h-110.5 sm:h-80 h-60"
                 isHaveFavIcon={true}
                 src={item.src}
@@ -382,9 +348,10 @@ export default function Home() {
             Check out the latest blooms we’ve curated just for you.
           </p>
           <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 mt-13">
-            {justBloomed.slice(0, 4).map((item, id) => (
+            {justBloomed.slice(0, 4).map((item) => (
               <ProductCard
-                key={id}
+                key={item.id}
+                id={item.id}
                 imageStyle="lg:h-110.5 sm:h-80 h-60"
                 isHaveFavIcon={true}
                 src={item.src}

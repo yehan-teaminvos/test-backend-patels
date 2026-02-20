@@ -34,6 +34,18 @@
 	],
 	"observability": {
 		"enabled": true
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "petals-db",
+			"database_id": "9b3cedc2-5574-44ad-a785-07439d5499b2",
+			"remote": true,
+			"migrations_dir": "src/db/migrations"
+		}
+	],
+	"vars": {
+		// JWT_SECRET is stored as a Cloudflare secret (use: npx wrangler secret put JWT_SECRET)
 	}
 	/**
 	 * Smart Placement
@@ -52,5 +64,5 @@
 	 * Note: Use secrets to store sensitive data.
 	 * https://developers.cloudflare.com/workers/configuration/secrets/
 	 */
-	// "vars": {  "MY_VARIABLE": "production_value" }
+
 }

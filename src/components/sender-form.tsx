@@ -7,7 +7,7 @@ import * as z from "zod";
 import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { cn } from "@/lib/utils";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const formSchema = z.object({
   firstName: z
@@ -44,6 +44,8 @@ interface SenderFormProps {
 export function SenderForm({ onSameAsReceiver }: SenderFormProps) {
   const [sameAsReceiver, setSameAsReceiver] = useState(false);
 
+  const [isLoadingUser, setIsLoadingUser] = useState(true);
+
   const form = useForm<SenderFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -54,8 +56,40 @@ export function SenderForm({ onSameAsReceiver }: SenderFormProps) {
     },
   });
 
+  // Pre-fill form with logged-in user data
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const res = await fetch("/api/auth/session");
+        if (res.ok) {
+          const data = (await res.json()) as { user?: { name: string; email: string; phone?: string } };
+          if (data.user) {
+            const names = data.user.name.split(" ");
+            const firstName = names[0] || "";
+            const lastName = names.slice(1).join(" ") || ""; // Handle "John Doe II" -> "Doe II"
+            
+            form.setValue("firstName", firstName);
+            // If lastName is empty, user might need to fill it manually, or we put "." if strictly required? 
+            // Better to let user fill it if missing. But let's try to be smart.
+            if (lastName) form.setValue("lastName", lastName);
+            
+            form.setValue("emailAddress", data.user.email);
+            if (data.user.phone) form.setValue("primaryPhone", data.user.phone);
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch user session", e);
+      } finally {
+        setIsLoadingUser(false);
+      }
+    }
+    fetchUser();
+  }, [form]);
+
   function onSubmit(data: SenderFormValues) {
     console.log(data);
+    // In a real app, we'd save this to context or local storage for the next step
+    // or submit to API. For now, just logging.
   }
 
   const handleSameAsReceiverChange = (checked: boolean) => {

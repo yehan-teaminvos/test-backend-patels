@@ -1,39 +1,71 @@
+"use client";
 import ProductCard from "@/components/product-card";
 import WishlistCategorySelector from "@/components/wishlist-category-selector";
 import Image from "next/image";
-import React from "react";
+import React, { useState, useEffect } from "react";
+
+type WishlistProduct = {
+  id: string;
+  name: string;
+  price: string;
+  installment: string;
+  src: string;
+  link: string;
+};
+
+function formatPrice(price: number) {
+  return `Rs. ${price.toLocaleString()}.00`;
+}
+function formatInstallment(price: number) {
+  return `Rs ${(price / 3).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
 
 const Wishlist = () => {
-  const productData = [
-    {
-      name: "Blush Harmony",
-      price: "Rs. 5,750.00",
-      installment: "Rs 1,316.66",
-      src: "/home/flower1.avif",
-      link: "/",
-    },
-    {
-      name: "Petal Whisper",
-      price: "Rs. 4,500.00",
-      installment: "Rs 1,316.66",
-      src: "/home/flower2.avif",
-      link: "/",
-    },
-    {
-      name: "Golden Dawn Bouquet",
-      price: "Rs. 6,200.00",
-      installment: "Rs 1,316.66",
-      src: "/home/flower3.avif",
-      link: "/",
-    },
-    {
-      name: "Velvet Bloom",
-      price: "Rs. 5,800.00",
-      installment: "Rs 1,316.66",
-      src: "/home/flower4.avif",
-      link: "/",
-    },
-  ];
+  const [productData, setProductData] = useState<WishlistProduct[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadWishlist() {
+      try {
+        const res = await fetch("/api/wishlist");
+        if (!res.ok) {
+          setProductData([]);
+          return;
+        }
+        const data = await res.json() as {
+          items: {
+            id: number;
+            productId: string;
+            product?: { name?: string; productImage?: string; price?: number };
+          }[];
+        };
+        setProductData(
+          data.items.map((item) => ({
+            id: item.productId,
+            name: item.product?.name || "Product",
+            price: formatPrice(item.product?.price || 0),
+            installment: formatInstallment(item.product?.price || 0),
+            src: item.product?.productImage || "/home/flower1.avif",
+            link: `/products/single-product?id=${item.productId}`,
+          }))
+        );
+      } catch {
+        setProductData([]);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadWishlist();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p className="font-poppins text-secondary-black/50">Loading wishlist...</p>
+      </div>
+    );
+  }
+
   return (
     <div>
       <section>
@@ -66,20 +98,33 @@ const Wishlist = () => {
           <div className="flex justify-end py-7.5">
             <WishlistCategorySelector />
           </div>
-          <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 ">
-            {productData.map((item, id) => (
-              <ProductCard
-                key={id}
-                imageStyle="lg:h-110.5 sm:h-80 h-60"
-                iconStyle="fill-white"
-                isHaveFavIcon={true}
-                src={item.src}
-                name={item.name}
-                price={item.price}
-                installment={item.installment}
-              />
-            ))}
-          </div>
+          {productData.length === 0 ? (
+            <div className="text-center py-20">
+              <p className="font-poppins text-secondary-black/50 text-lg">
+                Your wishlist is empty
+              </p>
+              <p className="font-poppins text-secondary-black/30 text-sm mt-2">
+                Browse our products and save your favorites!
+              </p>
+            </div>
+          ) : (
+            <div className="grid lg:grid-cols-4 grid-cols-2 gap-5 ">
+              {productData.map((item) => (
+                <ProductCard
+                  key={item.id}
+                  id={item.id}
+                  imageStyle="lg:h-110.5 sm:h-80 h-60"
+                  iconStyle="fill-white"
+                  isHaveFavIcon={true}
+                  initialInWishlist={true}
+                  src={item.src}
+                  name={item.name}
+                  price={item.price}
+                  installment={item.installment}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
     </div>

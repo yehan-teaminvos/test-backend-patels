@@ -1,0 +1,25 @@
+/* [project]/src/app/laluxesfont_f0897c27.module.css [app-client] (css) */
+@font-face {
+  font-family: laluxesFont;
+  src: url("../media/LaLuxes-s.p.4a8d8be9.woff") format("woff");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: laluxesFont Fallback;
+  src: local(Arial);
+  ascent-override: 67.93%;
+  descent-override: 19.78%;
+  line-gap-override: 0.0%;
+  size-adjust: 156.19%;
+}
+
+.laluxesfont_f0897c27-module__roAM9a__className {
+  font-family: laluxesFont, laluxesFont Fallback;
+}
+
+.laluxesfont_f0897c27-module__roAM9a__variable {
+  --font-laluxes: "laluxesFont", "laluxesFont Fallback";
+}
+
+/*# sourceMappingURL=src_app_laluxesfont_f0897c27_module_css_bad6b30c._.single.css.map*/

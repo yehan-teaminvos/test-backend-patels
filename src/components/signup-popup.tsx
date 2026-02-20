@@ -62,6 +62,8 @@ type ContactFormValues = z.infer<typeof formSchema>;
 export function SignupPopup() {
   const [showPassword, setShowPassword] = useState(false);
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [apiError, setApiError] = useState<string | null>(null);
 
   useEffect(() => {
     const handler = () => setOpen(true);
@@ -83,8 +85,34 @@ export function SignupPopup() {
     },
   });
 
-  function onSubmit(data: ContactFormValues) {
-    console.log(data);
+  async function onSubmit(data: ContactFormValues) {
+    setIsLoading(true);
+    setApiError(null);
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${data.firstName} ${data.lastName}`,
+          email: data.emailAddress,
+          phone: data.phoneNumber,
+          password: data.password,
+        }),
+      });
+      const result = await res.json() as { error?: string };
+      if (!res.ok) {
+        setApiError(result.error || "Registration failed");
+        return;
+      }
+      // Success — close signup and notify header to refresh session
+      setOpen(false);
+      form.reset();
+      window.dispatchEvent(new CustomEvent("auth-change"));
+    } catch {
+      setApiError("Network error. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   const openLogin = () => {
@@ -118,6 +146,11 @@ export function SignupPopup() {
                 className="space-y-3.5 w-full"
                 onSubmit={form.handleSubmit(onSubmit)}
               >
+                {apiError && (
+                  <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 text-sm font-poppins rounded">
+                    {apiError}
+                  </div>
+                )}
                 <div className="flex gap-5 w-full!">
                   <div className="w-1/2">
                     <Controller
@@ -316,8 +349,8 @@ export function SignupPopup() {
                 {/* <p className="flex justify-end font-poppins font-medium text-[#838383] -mt-2 cursor-pointer">Forget password?</p> */}
 
                 <div className="flex justify-end mt-6">
-                  <Button type="submit" className="px-16  w-full">
-                    Sign Up
+                  <Button type="submit" className="px-16  w-full" disabled={isLoading}>
+                    {isLoading ? "Signing up..." : "Sign Up"}
                   </Button>
                 </div>
               </form>
